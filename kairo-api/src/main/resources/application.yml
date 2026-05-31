@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: kairo
+  main:
+    web-application-type: reactive
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/kairo
+    username: kairo
+    password: kairo
+  flyway:
+    url: jdbc:postgresql://localhost:5432/kairo
+    user: kairo
+    password: kairo
+    enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+kairo:
+  providers:
+    default-provider: ollama-local
+    configured:
+      ollama-local:
+        type: ollama
+        host: http://localhost:11434
+      ollama-remote:
+        type: ollama
+        host: http://192.168.1.100:11434
+      openai:
+        type: openai
+        host: https://api.openai.com
+      anthropic:
+        type: anthropic
+        host: https://api.anthropic.com
+      gemini:
+        type: gemini
+        host: https://generativelanguage.googleapis.com
+      openrouter:
+        type: openrouter
+        host: https://openrouter.ai/api
